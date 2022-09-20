@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import Movies from './components/movies/movies';
+import MovieDescription from './components/movies/movieDescription/movieDescription';
 
 function App() {
+  const [movies, setMovies] = useState([]);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      const res = await fetch('https://swapi.dev/api/films/?format=json');
+      let data = await res.json();
+
+      setMovies(data.results);
+      setSelectedMovieId(5);
+    }
+    fetchMovies();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        // TODO: Use flex to make it responsive
+      }
+      <div style={{ float: 'left', width: '49%' }}>
+        <Movies movies={movies} />
+      </div>
+      {
+        // TODO: Implement movieDescription component
+      }
+      <div style={{ float: 'right', width: '49%' }}>
+        {selectedMovieId ?
+          <MovieDescription openingCrawl={movies[selectedMovieId].opening_crawl} />
+          : <div>No Movie Selected</div>
+        }
+      </div>
     </div>
   );
 }
