@@ -27,7 +27,7 @@ function App() {
         <Movies movies={movies} />
       </div>
       {
-        // TODO: Implement movieDescription component
+        // TODO: Implement movieDescription component 
       }
       <div style={{ float: 'right', width: '49%' }}>
         {selectedMovieId ?
