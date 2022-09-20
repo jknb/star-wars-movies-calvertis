@@ -1,6 +1,11 @@
-const MovieDescription = ({ openingCrawl }) => {
+import { convertNumberToLatin } from "../../../utils/numberToLatin";
+const MovieDescription = ({ episodeId, title, openingCrawl }) => {
     return (
-        <div> {openingCrawl} </div>
+        <>
+            <h2>Episode {convertNumberToLatin(episodeId)} - {title}</h2>
+            <div> {openingCrawl} </div>
+        </>
+
     );
 }
 

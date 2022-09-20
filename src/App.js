@@ -13,7 +13,6 @@ function App() {
       let data = await res.json();
 
       setMovies(data.results);
-      setSelectedMovieId(5);
     }
     fetchMovies();
   }, []);
@@ -24,14 +23,17 @@ function App() {
         // TODO: Use flex to make it responsive
       }
       <div style={{ float: 'left', width: '49%' }}>
-        <Movies movies={movies} />
+        <Movies
+          movies={movies}
+          clicked={(movieId) => selectedMovieId === movieId ? setSelectedMovieId(null) : setSelectedMovieId(movieId)}
+        />
       </div>
       {
         // TODO: Implement movieDescription component 
       }
       <div style={{ float: 'right', width: '49%' }}>
         {selectedMovieId ?
-          <MovieDescription openingCrawl={movies[selectedMovieId].opening_crawl} />
+          <MovieDescription episodeId={selectedMovieId} title={movies[selectedMovieId - 1].title} openingCrawl={movies[selectedMovieId - 1].opening_crawl} />
           : <div>No Movie Selected</div>
         }
       </div>
