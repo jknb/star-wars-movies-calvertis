@@ -1,10 +1,18 @@
+import magnifyingGlass from '../../../assets/magnifying-glass-solid.svg';
+
 const SearchBar = ({ searchBarInputChanged }) => {
 
     return (
-        <>
-            <span>🔍</span>
-            <input type="search" placeholder="Search..." onChange={e => searchBarInputChanged(e.target.value)} />
-        </>
+        <input style={{
+            backgroundImage: `url(${magnifyingGlass})`,
+            backgroundRepeat: 'no-repeat',
+            textIndent: '16px'
+        }}
+            type="search"
+            placeholder="Search..."
+            onChange={e => searchBarInputChanged(e.target.value)}
+        />
+
     );
 }
 
