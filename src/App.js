@@ -39,10 +39,12 @@ function App() {
   };
 
   const sortByEpisode = () => {
+    setMovies(movies.slice().sort((a, b) => a.episode_id - b.episode_id));
     setFilteredMovies(filteredMovies.slice().sort((a, b) => a.episode_id - b.episode_id));
   }
 
   const sortByYear = () => {
+    setMovies(movies.slice().sort((a, b) => a.release_date.localeCompare(b.release_date)));
     setFilteredMovies(filteredMovies.slice().sort((a, b) => a.release_date.localeCompare(b.release_date)));
   }
 
