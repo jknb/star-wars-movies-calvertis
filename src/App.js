@@ -3,13 +3,17 @@ import { useState, useEffect } from 'react';
 import Movies from './components/movies/movies';
 import MovieDescription from './components/movies/movieDescription/movieDescription';
 import SearchBar from './components/filters/searchBar/searchBar';
-import { convertNumberToLatin } from './utils/numberToLatin';
+import Loading from './components/loading/loading';
+import SortByButton from './components/filters/sortBy/sortByButton/sortByButton';
+import SortByModal from './components/filters/sortBy/sortByModal/sortByModal';
+import { sortByTypes } from './constants/sortByConstants';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
 
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [isSortByModalOpen, setIsSortByModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -17,24 +21,45 @@ function App() {
       let data = await res.json();
 
       setMovies(data.results);
+      setFilteredMovies(data.results);
     }
-    fetchMovies();
+    fetchMovies().catch(console.error);
   }, []);
 
   const handleSearchBarInput = inputValue => setFilteredMovies(movies.filter(movie => movie['title'].toLowerCase().includes(inputValue.toLowerCase())));
 
+  const toggleSortByModal = () => setIsSortByModalOpen(!isSortByModalOpen);
+
+  const sortMoviesBy = movieAttribute => {
+    if (movieAttribute === sortByTypes.episode) {
+      setFilteredMovies(movies.slice().sort((a, b) => a.episode_id - b.episode_id));
+    } else if (movieAttribute === sortByTypes.year) {
+      setFilteredMovies(movies.slice().sort((a, b) => a.release_date - b.release_date));
+    }
+  };
+
+  console.log(filteredMovies);
   return (
     <div className="App">
       {
         // TODO: Use flex to make it responsive
       }
-      <SearchBar changed={(inputValue) => handleSearchBarInput(inputValue)} />
+      <div>
+        <SortByButton sortByButtonClicked={toggleSortByModal} />
+        {isSortByModalOpen ? <SortByModal closeButtonModalClicked={toggleSortByModal} sortMoviesBy={sortMoviesBy} /> : null}
+        <SearchBar clicked={(inputValue) => handleSearchBarInput(inputValue)} changed={(inputValue) => handleSearchBarInput(inputValue)} />
+      </div>
+
       <div>
         <div style={{ float: 'left', width: '49%' }}>
-          <Movies
-            movies={filteredMovies.length ? filteredMovies : movies}
-            clicked={(movieId) => selectedMovieId === movieId ? setSelectedMovieId(null) : setSelectedMovieId(movieId)}
-          />
+          {movies.length ?
+            <Movies
+              movies={filteredMovies}
+              clicked={(movieId) => selectedMovieId === movieId ? setSelectedMovieId(null) : setSelectedMovieId(movieId)}
+            />
+            :
+            <Loading />
+          }
         </div>
         <div style={{ float: 'right', width: '49%' }}>
           {selectedMovieId ?
