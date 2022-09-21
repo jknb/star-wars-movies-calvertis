@@ -11,7 +11,7 @@ import { sortByTypes } from './constants/sortByConstants';
 function App() {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState({});
 
   const [isSortByModalOpen, setIsSortByModalOpen] = useState(false);
 
@@ -55,8 +55,11 @@ function App() {
       }
       <div>
         <SortByButton sortByButtonClicked={toggleSortByModal} />
-        {isSortByModalOpen ? <SortByModal closeButtonModalClicked={toggleSortByModal} sortMoviesBy={sortMoviesBy} /> : null}
-        <SearchBar clicked={(inputValue) => handleSearchBarInput(inputValue)} changed={(inputValue) => handleSearchBarInput(inputValue)} />
+        {isSortByModalOpen ?
+          <SortByModal closeButtonModalClicked={toggleSortByModal} sortMoviesBy={sortMoviesBy} />
+          : null
+        }
+        <SearchBar searchBarInputChanged={(inputValue) => handleSearchBarInput(inputValue)} />
       </div>
 
       <div>
@@ -64,15 +67,15 @@ function App() {
           {movies.length ?
             <Movies
               movies={filteredMovies}
-              clicked={(movieId) => selectedMovieId === movieId ? setSelectedMovieId(null) : setSelectedMovieId(movieId)}
+              movieClicked={(movie) => selectedMovie.episode_id === movie.episode_id ? setSelectedMovie({}) : setSelectedMovie(movie)}
             />
             :
             <Loading />
           }
         </div>
         <div style={{ float: 'right', width: '49%' }}>
-          {selectedMovieId ?
-            <MovieDescription episodeId={selectedMovieId} title={movies[selectedMovieId - 1].title} openingCrawl={movies[selectedMovieId - 1].opening_crawl} />
+          {selectedMovie.episode_id ?
+            <MovieDescription episodeId={selectedMovie.episode_id} title={selectedMovie.title} openingCrawl={selectedMovie.opening_crawl} />
             : <div>No Movie Selected</div>
           }
         </div>

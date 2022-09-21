@@ -1,10 +1,10 @@
 import { convertNumberToLatin } from "../../../utils/numberToLatin";
 
-const Movie = ({ episodeId, title, releaseDate, clicked }) => {
+const Movie = ({ episodeId, title, releaseDate, movieClicked }) => {
     return (
         <div
             style={{ display: 'flex', justifyContent: 'space-between' }}
-            onClick={() => clicked(episodeId)}
+            onClick={movieClicked}
         >
             <div>EPISODE {episodeId}</div>
             <div >Episode {convertNumberToLatin(episodeId)} - {title}</div>

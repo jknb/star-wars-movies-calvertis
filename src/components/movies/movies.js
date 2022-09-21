@@ -1,11 +1,11 @@
 import Movie from './movie/movie.js';
 
-const Movies = ({ movies, clicked }) => {
+const Movies = ({ movies, movieClicked }) => {
     return (
         <>
             {movies.map(movie =>
                 <Movie
-                    clicked={clicked}
+                    movieClicked={() => movieClicked(movie)}
                     key={movie.episode_id}
                     episodeId={movie.episode_id}
                     title={movie.title}

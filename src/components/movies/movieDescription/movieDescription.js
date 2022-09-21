@@ -1,4 +1,5 @@
 import { convertNumberToLatin } from "../../../utils/numberToLatin";
+
 const MovieDescription = ({ episodeId, title, openingCrawl }) => {
     return (
         <>
