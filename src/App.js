@@ -62,8 +62,8 @@ function App() {
         <SearchBar searchBarInputChanged={(inputValue) => handleSearchBarInput(inputValue)} />
       </div>
 
-      <div>
-        <div style={{ float: 'left', width: '49%' }}>
+      <div className="moviesContainer">
+        <div className="movies">
           {movies.length ?
             <Movies
               movies={filteredMovies}
@@ -73,10 +73,11 @@ function App() {
             <Loading />
           }
         </div>
-        <div style={{ float: 'right', width: '49%' }}>
+        <hr />
+        <div className="selectedMovie">
           {selectedMovie.episode_id ?
             <MovieDescription episodeId={selectedMovie.episode_id} title={selectedMovie.title} openingCrawl={selectedMovie.opening_crawl} />
-            : <div>No Movie Selected</div>
+            : <div className="noMovieSelected">No Movie Selected</div>
           }
         </div>
       </div>
