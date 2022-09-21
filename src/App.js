@@ -32,13 +32,20 @@ function App() {
 
   const sortMoviesBy = movieAttribute => {
     if (movieAttribute === sortByTypes.episode) {
-      setFilteredMovies(movies.slice().sort((a, b) => a.episode_id - b.episode_id));
+      sortByEpisode();
     } else if (movieAttribute === sortByTypes.year) {
-      setFilteredMovies(movies.slice().sort((a, b) => a.release_date - b.release_date));
+      sortByYear();
     }
   };
 
-  console.log(filteredMovies);
+  const sortByEpisode = () => {
+    setFilteredMovies(filteredMovies.slice().sort((a, b) => a.episode_id - b.episode_id));
+  }
+
+  const sortByYear = () => {
+    setFilteredMovies(filteredMovies.slice().sort((a, b) => a.release_date.localeCompare(b.release_date)));
+  }
+
   return (
     <div className="App">
       {
