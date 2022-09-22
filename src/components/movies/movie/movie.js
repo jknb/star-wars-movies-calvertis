@@ -3,6 +3,7 @@ import { convertNumberToLatin } from "../../../utils/numberToLatin";
 const Movie = ({ episodeId, title, releaseDate, movieClicked }) => {
     return (
         <div
+            className="movie"
             style={{ display: 'flex', justifyContent: 'space-between' }}
             onClick={movieClicked}
         >
