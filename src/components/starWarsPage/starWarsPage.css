@@ -22,6 +22,11 @@
     line-height: 100px;
 }
 
+.loadingIcon {
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width: 600px) {
     .moviesContainer {
         flex-direction: column;

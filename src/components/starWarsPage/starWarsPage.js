@@ -1,5 +1,5 @@
 import './starWarsPage.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Movies from '../movies/movies';
 import MovieDescription from '../movies/movieDescription/movieDescription';
 import SearchBar from '../filters/searchBar/searchBar';
@@ -8,6 +8,7 @@ import SortByButton from '../filters/sortBy/sortByButton/sortByButton';
 import SortByModal from '../filters/sortBy/sortByModal/sortByModal';
 import { sortByTypes } from '../../constants/sortByConstants';
 import Error from '../error/error';
+import Stack from '@mui/material/Stack';
 
 const StarWarsPage = ({ movies, pending, error }) => {
     const [selectedMovie, setSelectedMovie] = useState({});
@@ -34,31 +35,31 @@ const StarWarsPage = ({ movies, pending, error }) => {
 
     return (
         <>
-            {
-                // TODO: Use flex to make it responsive
-            }
-            <div className="filtersArea">
+            <Stack spacing={2} direction="row">
                 <SortByButton sortByButtonClicked={toggleSortByModal} />
-                {isSortByModalOpen ?
-                    <SortByModal closeButtonModalClicked={toggleSortByModal} setMovieAttribute={setMovieAttribute} />
-                    : null
-                }
                 <SearchBar searchBarInputChanged={(inputValue) => setSearchBarText(inputValue)} />
-            </div>
+            </Stack>
+
+            {isSortByModalOpen ?
+                <SortByModal closeButtonModalClicked={toggleSortByModal} setMovieAttribute={setMovieAttribute} />
+                : null
+            } 
 
             <div className="moviesContainer">
                 <div className="movies">
-                    {error ?
-                        <Error />
-                        :
-                        pending ?
+                    {pending ?
+                        <div className="loadingIcon">
                             <Loading />
-                            :
+                        </div>
+                        :
+                        <Stack spacing={2} direction="column">
                             <Movies
                                 movies={sortMovies(movies.filter(filterMovies))}
                                 movieClicked={(movie) => selectedMovie.episode_id === movie.episode_id ? setSelectedMovie({}) : setSelectedMovie(movie)}
                             />
+                        </Stack>
                     }
+                    {error && <Error />}
                 </div>
                 <hr />
                 <div className="selectedMovie">
