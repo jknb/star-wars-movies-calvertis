@@ -1,6 +1,8 @@
+import Button from '@mui/material/Button';
+
 const SortByButton = ({ sortByButtonClicked }) => {
     return (
-        <button onClick={sortByButtonClicked}>Sort By...</button>
+        <Button size="small" variant="outlined" onClick={sortByButtonClicked}>Sort By...</Button>
     );
 }
 
