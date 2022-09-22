@@ -1,4 +1,4 @@
 export const sortByTypes = {
-    episode: 0,
-    year: 1,
+    episode: 1,
+    year: 2,
 };
