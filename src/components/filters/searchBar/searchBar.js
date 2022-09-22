@@ -1,19 +1,21 @@
-import magnifyingGlass from '../../../assets/magnifying-glass-solid.svg';
+import { TextField, InputAdornment } from '@material-ui/core';
+import SearchIcon from '@mui/icons-material/Search';
+import './searchBar.css';
 
-const SearchBar = ({ searchBarInputChanged }) => {
-
-    return (
-        <input className="searchBar" style={{
-            backgroundImage: `url(${magnifyingGlass})`,
-            backgroundRepeat: 'no-repeat',
-            textIndent: '16px'
+const SearchBar = ({ searchBarInputChanged }) => (
+    <TextField
+        className="searchField"
+        type="search"
+        placeholder="Search..."
+        onChange={e => searchBarInputChanged(e.target.value)}
+        InputProps={{
+            startAdornment: (
+                <InputAdornment position="start">
+                    <SearchIcon />
+                </InputAdornment>
+            ),
         }}
-            type="search"
-            placeholder="Search..."
-            onChange={e => searchBarInputChanged(e.target.value)}
-        />
-
-    );
-}
+    />
+);
 
 export default SearchBar;
