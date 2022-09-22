@@ -3,7 +3,7 @@ import magnifyingGlass from '../../../assets/magnifying-glass-solid.svg';
 const SearchBar = ({ searchBarInputChanged }) => {
 
     return (
-        <input style={{
+        <input className="searchBar" style={{
             backgroundImage: `url(${magnifyingGlass})`,
             backgroundRepeat: 'no-repeat',
             textIndent: '16px'
