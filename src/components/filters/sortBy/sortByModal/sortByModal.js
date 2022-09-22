@@ -1,13 +1,13 @@
 import './sortByModal.css';
 import { sortByTypes } from '../../../../constants/sortByConstants';
 
-const SortByModal = ({ closeButtonModalClicked, sortMoviesBy }) => {
+const SortByModal = ({ closeButtonModalClicked, setMovieAttribute }) => {
     return (
         <div className="modal">
             <div> Sort By </div>
             <span className="close" onClick={closeButtonModalClicked}>&times;</span>
-            <div onClick={() => sortMoviesBy(sortByTypes.episode)}>Episode</div>
-            <div onClick={() => sortMoviesBy(sortByTypes.year)}>Year</div>
+            <div onClick={() => setMovieAttribute(sortByTypes.episode)}>Episode</div>
+            <div onClick={() => setMovieAttribute(sortByTypes.year)}>Year</div>
         </div>
     );
 }
