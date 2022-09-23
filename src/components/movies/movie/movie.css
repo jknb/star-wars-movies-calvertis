@@ -1,0 +1,8 @@
+.movie {
+    display: flex;
+    justify-content: space-between;
+}
+
+.movie:hover {
+    cursor: pointer;
+}
