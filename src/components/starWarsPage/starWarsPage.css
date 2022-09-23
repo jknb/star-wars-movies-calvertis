@@ -2,6 +2,10 @@
     display: flex;
 }
 
+.header {
+    text-align: center;
+}
+
 .movies {
     width: 50%;
     padding: 5em 1em;

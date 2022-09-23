@@ -10,6 +10,7 @@ import SortByMenu from '../filters/sortBy/sortByMenu/sortByMenu';
 import { sortByTypes } from '../../constants/sortByConstants';
 import Error from '../error/error';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 const StarWarsPage = ({ movies, pending, error }) => {
     const [selectedMovie, setSelectedMovie] = useState({});
@@ -46,6 +47,8 @@ const StarWarsPage = ({ movies, pending, error }) => {
             </Stack>
 
             {isSortByMenuOpen && <SortByMenu closeButtonMenuClicked={toggleSortByMenu} sortedBy={sortedBy} setSortedBy={setSortedBy} />}
+
+            <Typography className="header" variant="h3" gutterBottom mt={4}>Star Wars</Typography>
 
             <div className="moviesContainer">
                 <div className="movies">
