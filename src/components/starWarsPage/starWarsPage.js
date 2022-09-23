@@ -28,9 +28,7 @@ const StarWarsPage = ({ movies, pending, error }) => {
     };
 
     const filterMovies = (movie) => (!!searchBarText ? movie.title.toLowerCase().includes(searchBarText.toLowerCase()) : true);
-
     const sortByEpisode = (movies) => movies.slice().sort((a, b) => a.episode_id - b.episode_id);
-
     const sortByYear = (movies) => movies.slice().sort((a, b) => a.release_date.localeCompare(b.release_date));
 
     return (
@@ -40,10 +38,7 @@ const StarWarsPage = ({ movies, pending, error }) => {
                 <SearchBar searchBarInputChanged={(inputValue) => setSearchBarText(inputValue)} />
             </Stack>
 
-            {isSortByMenuOpen ?
-                <SortByMenu closeButtonMenuClicked={toggleSortByMenu} setSortedBy={setSortedBy} />
-                : null
-            }
+            {isSortByMenuOpen && !pending && <SortByMenu closeButtonMenuClicked={toggleSortByMenu} setSortedBy={setSortedBy} />}
 
             <div className="moviesContainer">
                 <div className="movies">
