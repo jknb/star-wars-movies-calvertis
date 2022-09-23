@@ -5,7 +5,7 @@ import MovieDescription from '../movies/movieDescription/movieDescription';
 import SearchBar from '../filters/searchBar/searchBar';
 import Loading from '../loading/loading';
 import SortByButton from '../filters/sortBy/sortByButton/sortByButton';
-import SortByModal from '../filters/sortBy/sortByModal/sortByModal';
+import SortByMenu from '../filters/sortBy/sortByMenu/sortByMenu';
 import { sortByTypes } from '../../constants/sortByConstants';
 import Error from '../error/error';
 import Stack from '@mui/material/Stack';
@@ -13,16 +13,16 @@ import Stack from '@mui/material/Stack';
 const StarWarsPage = ({ movies, pending, error }) => {
     const [selectedMovie, setSelectedMovie] = useState({});
     const [searchBarText, setSearchBarText] = useState('');
-    const [movieAttribute, setMovieAttribute] = useState(null);
-    const [isSortByModalOpen, setIsSortByModalOpen] = useState(false);
+    const [sortedBy, setSortedBy] = useState(null);
+    const [isSortByMenuOpen, setIsSortByMenuOpen] = useState(false);
 
-    const toggleSortByModal = () => setIsSortByModalOpen(!isSortByModalOpen);
+    const toggleSortByMenu = () => setIsSortByMenuOpen(!isSortByMenuOpen);
 
     const sortMovies = movies => {
-        if (!movieAttribute) return movies;
-        if (movieAttribute === sortByTypes.episode) {
+        if (!sortedBy) return movies;
+        if (sortedBy === sortByTypes.episode) {
             return sortByEpisode(movies);
-        } else if (movieAttribute === sortByTypes.year) {
+        } else if (sortedBy === sortByTypes.year) {
             return sortByYear(movies);
         }
     };
@@ -36,14 +36,14 @@ const StarWarsPage = ({ movies, pending, error }) => {
     return (
         <>
             <Stack spacing={2} direction="row">
-                <SortByButton sortByButtonClicked={toggleSortByModal} />
+                <SortByButton sortByButtonClicked={toggleSortByMenu} />
                 <SearchBar searchBarInputChanged={(inputValue) => setSearchBarText(inputValue)} />
             </Stack>
 
-            {isSortByModalOpen ?
-                <SortByModal closeButtonModalClicked={toggleSortByModal} setMovieAttribute={setMovieAttribute} />
+            {isSortByMenuOpen ?
+                <SortByMenu closeButtonMenuClicked={toggleSortByMenu} setSortedBy={setSortedBy} />
                 : null
-            } 
+            }
 
             <div className="moviesContainer">
                 <div className="movies">
