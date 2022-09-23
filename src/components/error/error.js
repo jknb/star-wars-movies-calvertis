@@ -1,5 +1,7 @@
+import './error.css';
+
 const Error = () => (
-    <div>
+    <div className="error">
         An error occurred...
     </div>
 );
