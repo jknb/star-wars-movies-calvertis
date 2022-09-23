@@ -1,3 +1,7 @@
 .searchField {
     width: calc(50% - 100px);
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+    cursor: pointer;
+}
