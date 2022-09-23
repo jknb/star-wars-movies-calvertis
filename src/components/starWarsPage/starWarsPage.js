@@ -13,10 +13,16 @@ import Stack from '@mui/material/Stack';
 const StarWarsPage = ({ movies, pending, error }) => {
     const [selectedMovie, setSelectedMovie] = useState({});
     const [searchBarText, setSearchBarText] = useState('');
-    const [sortedBy, setSortedBy] = useState(null);
+    const [sortedBy, setSortedBy] = useState(sortByTypes.year);
     const [isSortByMenuOpen, setIsSortByMenuOpen] = useState(false);
 
-    const toggleSortByMenu = () => setIsSortByMenuOpen(!isSortByMenuOpen);
+    const toggleSortByMenu = () => {
+        if (pending || error) {
+            setIsSortByMenuOpen(false);
+        } else {
+            setIsSortByMenuOpen(!isSortByMenuOpen);
+        }
+    }
 
     const sortMovies = movies => {
         if (!sortedBy) return movies;
@@ -38,7 +44,7 @@ const StarWarsPage = ({ movies, pending, error }) => {
                 <SearchBar searchBarInputChanged={(inputValue) => setSearchBarText(inputValue)} />
             </Stack>
 
-            {isSortByMenuOpen && !pending && <SortByMenu closeButtonMenuClicked={toggleSortByMenu} setSortedBy={setSortedBy} />}
+            {isSortByMenuOpen && <SortByMenu closeButtonMenuClicked={toggleSortByMenu} sortedBy={sortedBy} setSortedBy={setSortedBy} />}
 
             <div className="moviesContainer">
                 <div className="movies">

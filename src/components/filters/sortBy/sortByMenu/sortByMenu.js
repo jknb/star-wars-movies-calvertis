@@ -6,8 +6,8 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { useState } from 'react';
 
-const SortByMenu = ({ closeButtonMenuClicked, setSortedBy }) => {
-    const [selectedIndex, setSelectedIndex] = useState(sortByTypes.year);
+const SortByMenu = ({ closeButtonMenuClicked, sortedBy, setSortedBy }) => {
+    const [selectedIndex, setSelectedIndex] = useState(sortedBy);
 
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
