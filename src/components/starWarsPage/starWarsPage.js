@@ -2,6 +2,7 @@ import './starWarsPage.css';
 import { useState } from 'react';
 import Movies from '../movies/movies';
 import MovieDescription from '../movies/movieDescription/movieDescription';
+import NoMovieSelected from '../movies/movieDescription/noMovieSelected';
 import SearchBar from '../filters/searchBar/searchBar';
 import Loading from '../loading/loading';
 import SortByButton from '../filters/sortBy/sortByButton/sortByButton';
@@ -66,7 +67,7 @@ const StarWarsPage = ({ movies, pending, error }) => {
                 <div className="selectedMovie">
                     {selectedMovie.episode_id ?
                         <MovieDescription episodeId={selectedMovie.episode_id} title={selectedMovie.title} openingCrawl={selectedMovie.opening_crawl} />
-                        : <div className="noMovieSelected">No Movie Selected</div>
+                        : <NoMovieSelected />
                     }
                 </div>
             </div>
