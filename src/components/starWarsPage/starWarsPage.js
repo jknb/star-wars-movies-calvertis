@@ -11,6 +11,7 @@ import { sortByTypes } from '../../constants/sortByConstants';
 import Error from '../error/error';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Divider } from '@material-ui/core';
 
 const StarWarsPage = ({ movies, pending, error }) => {
     const [selectedMovie, setSelectedMovie] = useState({});
@@ -66,7 +67,7 @@ const StarWarsPage = ({ movies, pending, error }) => {
                     }
                     {error && <Error />}
                 </div>
-                <hr />
+                <Divider orientation="vertical" flexItem />
                 <div className="selectedMovie">
                     {selectedMovie.episode_id ?
                         <MovieDescription episodeId={selectedMovie.episode_id} title={selectedMovie.title} openingCrawl={selectedMovie.opening_crawl} />
